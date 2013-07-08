@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Puppet Code Static Analysis Results - <%= name %></title>
+<body>
+<h1><%= name %></h1>
+<% if specific_results[:validate][:error].empty? &&
+      specific_results[:validate][:warning].empty? &&
+      specific_results[:lint][:error].empty? &&
+      specific_results[:lint][:warning].empty? %>
+    <h2>CONGRATULATIONS - THERE ARE NO ISSUES WITH THIS FILE!</h2>
+<% end %>
+<% [:validate, :lint].each do |check| %>
+  <% [:error, :warning].each do |type| %>
+    <% unless specific_results[check][type].empty? %>
+    <div id="<%= check %>_<%= type %>">
+      <h2><%= check.to_s.upcase %> <%= type.to_s.upcase %>S</h2>
+      <ul>
+      <% specific_results[check][type].each do |result| %>
+        <li><%= result %>
+      <% end %>
+      </ul>
+    </div>
+    <% end %>
+  <% end %>
+<% end %>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Puppet Code Static Analysis Results</title>
+<style type="text/css">
+  body {
+    font: 10pt/1.5em "Lucida Grande", "Lucida Sans Unicode", Verdana, Helvetica, Arial, sans-serif;
+    margin: 10px;
+    width: 90%;
+  }
+  h1, h2 {
+    font-size: 2em;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th {
+    color: white;
+    background-color: black;
+    font-size: 1.5em;
+    height: 30px;
+    padding: 6px 8px;
+  }
+  td {
+    border-bottom: 1px solid #ccc;
+    padding: 6px 8px;
+  }
+  .count {
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+  <table>
+    <tr>
+      <th>Filename</th><th>Validation Errors</th><th>Validation Warnings</th><th>Lint Errors</th><th>Lint Warnings</th><th>Overall Score</th>
+    </tr>
+    <% order.each do |key| %>
+    <tr>
+      <td><a href="<%= overview_results[key][:href] %>"><%= key %></a></td>
+      <td class="count"><%= overview_results[key][:validate_errors] %></td>
+      <td class="count"><%= overview_results[key][:validate_warnings] %></td>
+      <td class="count"><%= overview_results[key][:lint_errors] %></td>
+      <td class="count"><%= overview_results[key][:lint_warnings] %></td>
+      <td style="background-color: #<%= overview_results[key][:color] %>" class="count"><%= overview_results[key][:score] %></td>
+    </tr>
+    <% end %>
+  </table>
+</body>
+</html>
